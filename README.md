@@ -1,4 +1,4 @@
-# 🪐 Ringo Todo
+# Ringo Todo
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3-black?logo=next.js)](https://nextjs.org/)
@@ -13,60 +13,60 @@ Designed for individuals and collaborative teams, Ringo Todo combines flexible t
 
 ---
 
-## 📑 Table of Contents
+## Table of Contents
 
-- [✨ Features](#-features)
-- [🛠️ Architecture & Tech Stack](#️-architecture--tech-stack)
-  - [Project Structure](#️-architecture--tech-stack)
+- [Features](#features)
+- [Architecture & Tech Stack](#architecture--tech-stack)
+  - [Project Structure](#architecture--tech-stack)
   - [Technologies](#technologies)
-- [🗄️ Database Schema & Data Model](#️-database-schema--data-model)
-  - [Entity Relationship Diagram](#️-database-schema--data-model)
+- [Database Schema & Data Model](#database-schema--data-model)
+  - [Entity Relationship Diagram](#database-schema--data-model)
   - [Primary Tables](#primary-tables)
-- [🚀 Getting Started](#-getting-started)
+- [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation & Setup](#installation)
-- [💻 Available Scripts](#-available-scripts)
-- [🔌 API Endpoints Reference](#-api-endpoints-reference)
-- [🎨 Design System & Customization](#-design-system--customization)
-- [🤝 Contributing](#-contributing)
+- [Available Scripts](#available-scripts)
+- [API Endpoints Reference](#api-endpoints-reference)
+- [Design System & Customization](#design-system--customization)
+- [Contributing](#contributing)
   - [Coding Guidelines](#coding-guidelines)
-- [📄 License](#-license)
+- [License](#license)
 
 ---
 
-## ✨ Features
+## Features
 
-- 🏢 **Multi-Tenancy & Workspace Hierarchy**:
+- **Multi-Tenancy & Workspace Hierarchy**:
   - Full organization-level tenant switching with custom brand colors and logos.
   - Multi-workspace and multi-project segmentation.
   - Role-based membership (`owner`, `admin`, `member`) and team directories.
-- 📊 **Multi-Dimensional Project Views**:
+- **Multi-Dimensional Project Views**:
   - **Kanban Board**: Drag-and-drop swimlanes with custom task lists and statuses.
   - **Interactive List**: High-density task table with sorting, grouping, and batch operations.
   - **Calendar**: Deadlines, scheduled work, and milestones at a glance.
   - **Timeline / Gantt**: Visual schedule planning and dependency monitoring.
-- 🎯 **Deep-Work Focus Mode (Pomodoro)**:
+- **Deep-Work Focus Mode (Pomodoro)**:
   - Configurable focus & break intervals (25/5 min default).
   - Audio and celebration effects (confetti) on session completion.
   - Direct goal flow telemetry integration for tracking completed sessions.
-- 📈 **Productivity Analytics Dashboard**:
+- **Productivity Analytics Dashboard**:
   - Real-time team velocity, completion ratios, and historical task trends.
   - Member workload distribution and estimated vs. actual hours tracking.
   - Breakdown by priority (`urgent`, `high`, `medium`, `low`) and status.
-- ⚡ **Developer & Power-User Shortcuts**:
+- **Developer & Power-User Shortcuts**:
   - **Command Palette (`⌘K` / `Ctrl+K`)**: Instant navigation across projects, views, and quick actions.
   - **Quick Add (`C` / Quick Modal)**: Rapid task creation from anywhere.
   - Full keyboard accessibility and dark/light theme switching.
-- 📝 **Rich Task Management**:
+- **Rich Task Management**:
   - Subtask checklists with progress computation.
   - Real-time activity log and threaded comments.
   - Time tracking (estimated vs. actual hours), due dates, assignees, and custom colored tags.
-- 📡 **Integrated Goal & Telemetry Analytics**:
+- **Integrated Goal & Telemetry Analytics**:
   - Native integration with `@appxiom/4react` to measure user journeys, feature adoption, and session goals.
 
 ---
 
-## 🛠️ Architecture & Tech Stack
+## Architecture & Tech Stack
 
 ```
 ringo-todo/
@@ -112,7 +112,7 @@ ringo-todo/
 
 ---
 
-## 🗄️ Database Schema & Data Model
+## Database Schema & Data Model
 
 Ringo Todo uses `@libsql/client` to execute SQL queries on an embedded SQLite database (`ringo-todo.sqlite`). The schema initializes automatically on first run and seeds sample demo data for rapid onboarding.
 
@@ -151,7 +151,7 @@ erDiagram
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -163,8 +163,8 @@ erDiagram
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/ringo-todo.git
-   cd ringo-todo
+   git clone https://github.com/rp-bg/ringo.git
+   cd ringo
    ```
 
 2. **Install dependencies**:
@@ -193,7 +193,7 @@ erDiagram
 
 ---
 
-## 💻 Available Scripts
+## Available Scripts
 
 | Command         | Description                                                                                      |
 | :-------------- | :----------------------------------------------------------------------------------------------- |
@@ -204,7 +204,7 @@ erDiagram
 
 ---
 
-## 🔌 API Endpoints Reference
+## API Endpoints Reference
 
 The Next.js App Router exposes typed REST API handlers under `/api/*`:
 
@@ -221,7 +221,7 @@ The Next.js App Router exposes typed REST API handlers under `/api/*`:
 
 ---
 
-## 🎨 Design System & Customization
+## Design System & Customization
 
 The interface relies on clean, modern CSS custom properties (`var(--...)`) defined in [src/app/globals.css](file:///Users/robinpanicker/dev/web/ringo-todo/src/app/globals.css):
 
@@ -231,7 +231,7 @@ The interface relies on clean, modern CSS custom properties (`var(--...)`) defin
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions from the open-source community are warmly welcomed!
 
@@ -258,6 +258,6 @@ Contributions from the open-source community are warmly welcomed!
 
 ---
 
-## 📄 License
+## License
 
 Distributed under the **MIT License**. See [LICENSE](LICENSE) for more information.
