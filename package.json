@@ -10,7 +10,7 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@appxiom/4react": "^0.1.12",
+    "@appxiom/4react": "^2.1.0",
     "@libsql/client": "^0.17.4",
     "canvas-confetti": "^1.9.4",
     "lucide-react": "^1.39.0",
