@@ -198,7 +198,7 @@ erDiagram
 | Command         | Description                                                                                      |
 | :-------------- | :----------------------------------------------------------------------------------------------- |
 | `npm run dev`   | Starts the Next.js development server on port 3000                                               |
-| `npm run build` | Increments build number via `scripts/update-build.js` and creates an optimized production bundle |
+| `npm run build` | Increments build number via `scripts/update-build.mjs` and creates an optimized production bundle |
 | `npm run start` | Runs the compiled Next.js production server                                                      |
 | `npm run lint`  | Runs ESLint to check for code style, type errors, and Next.js compiler rules                     |
 
