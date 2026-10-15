@@ -59,6 +59,36 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+interface FetchTasksOptions {
+  tenantId: string;
+  activeView: string;
+  projectId?: string;
+  userId?: string;
+  searchQuery?: string;
+}
+
+async function fetchTasksData({
+  tenantId,
+  activeView,
+  projectId,
+  userId,
+  searchQuery,
+}: FetchTasksOptions) {
+  let url = `/api/tasks?tenantId=${tenantId}`;
+  if (activeView === 'project' && projectId) {
+    url += `&projectId=${projectId}`;
+  } else if (activeView === 'my-tasks' && userId) {
+    url += `&userId=${userId}`;
+  }
+
+  if (searchQuery?.trim()) {
+    url += `&search=${encodeURIComponent(searchQuery.trim())}`;
+  }
+
+  const res = await fetch(url);
+  return res.json();
+}
+
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const ax = useAX();
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
@@ -165,18 +195,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setIsLoadingTasks(true);
 
     try {
-      let url = `/api/tasks?tenantId=${currentTenant.id}`;
-      if (activeView === 'project' && currentProject) {
-        url += `&projectId=${currentProject.id}`;
-      } else if (activeView === 'my-tasks' && currentUser) {
-        url += `&userId=${currentUser.id}`;
-      }
+      const res = await fetchTasksData({
+        tenantId: currentTenant.id,
+        activeView,
+        projectId: currentProject?.id,
+        userId: currentUser?.id,
+        searchQuery,
+      });
 
-      if (searchQuery.trim()) {
-        url += `&search=${encodeURIComponent(searchQuery.trim())}`;
-      }
-
-      const res = await fetch(url).then(r => r.json());
       if (res.tasks) {
         setTasks(res.tasks);
       }
@@ -191,8 +217,37 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [currentTenant, activeView, currentProject, currentUser, searchQuery]);
 
   useEffect(() => {
-    refreshTasks();
-  }, [refreshTasks]);
+    if (!currentTenant) return;
+    let ignore = false;
+
+    async function loadTasks() {
+      try {
+        const res = await fetchTasksData({
+          tenantId: currentTenant!.id,
+          activeView,
+          projectId: currentProject?.id,
+          userId: currentUser?.id,
+          searchQuery,
+        });
+
+        if (!ignore) {
+          if (res.tasks) {
+            setTasks(res.tasks);
+          }
+          if (res.lists) {
+            setProjectLists(res.lists);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load tasks:', err);
+      }
+    }
+
+    loadTasks();
+    return () => {
+      ignore = true;
+    };
+  }, [currentTenant, activeView, currentProject, currentUser, searchQuery]);
 
   const refreshAll = async () => {
     await refreshTasks();
