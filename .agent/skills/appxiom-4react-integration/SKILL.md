@@ -1,3 +1,8 @@
+---
+name: appxiom-4react-integration
+description: "Integrate @appxiom/4react in React applications, including React 18/19, Vite, and client-side setup for Next.js or other SSR frameworks. Use when adding Appxiom monitoring or telemetry to a React app."
+---
+
 # Appxiom 4React Integration Skill
 
 Comprehensive guidance for integrating the Appxiom React SDK (`@appxiom/4react`) into React applications.
@@ -99,27 +104,41 @@ setupApp();
 Or expose the instance via React Context:
 
 ```typescript
-import React, { createContext, useContext } from 'react';
+// lib/ax-client.tsx
+'use client';
+
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from 'react';
 import init, { type AXReact } from '@appxiom/4react';
 
-const AXContext = createContext<AXReact | null>(null);
+const AXContext = createContext<AXReact | null | undefined>(undefined);
 
-export const AXProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [ax, setAx] = React.useState<AXReact | null>(null);
+export const AXProvider = ({ children }: { children: ReactNode }) => {
+  const [ax, setAx] = useState<AXReact | null>(null);
 
-  React.useEffect(() => {
-    const initAX = async () => {
-      const instance = await init(
-        'YOUR_APP_KEY',
-        'YOUR_PLATFORM_KEY',
-        'YOUR_APP_VERSION',
-        'YOUR_BUILD_IDENTIFIER',
-      );
-      setAx(instance);
+  useEffect(() => {
+    let active = true;
+    void init(
+      'YOUR_APP_KEY',
+      'YOUR_PLATFORM_KEY',
+      'YOUR_APP_VERSION',
+      'YOUR_BUILD_IDENTIFIER',
+    ).then(
+      (instance) => {
+        if (active) setAx(instance);
+      },
+      (error: unknown) => {
+        console.error('Failed to initialize Appxiom', error);
+      },
+    );
+    return () => {
+      active = false;
     };
-    initAX();
   }, []);
 
   return <AXContext.Provider value={ax}>{children}</AXContext.Provider>;
@@ -127,10 +146,12 @@ export const AXProvider: React.FC<{ children: React.ReactNode }> = ({
 
 export const useAX = () => {
   const ax = useContext(AXContext);
-  if (!ax) throw new Error('AXContext not initialized');
+  if (ax === undefined) throw new Error('useAX must be used within AXProvider');
   return ax;
 };
 ```
+
+`useAX()` returns `null` until initialization completes; consumers should handle that loading state.
 
 ### Step 5: Automatic React Instrumentation
 
@@ -161,66 +182,27 @@ npm run dev -- --force
 
 This setting only affects Vite's development optimizer; it is safe to keep for production builds.
 
-### Step 7: Next.js / SSR Frameworks
+### Step 7: SSR and Client-Only Frameworks
 
-For Next.js, Nuxt, SvelteKit, Remix, or any server-rendered React setup, load and initialize the SDK only on the client. Never import or initialize it from server components, route handlers, or server rendering code.
-
-```typescript
-// lib/ax-client.ts
-'use client';
-
-import { useEffect } from 'react';
-import init, { type AXReact } from '@appxiom/4react';
-
-let axInstance: AXReact | null = null;
-
-export const initAX = async () => {
-  if (axInstance) return axInstance;
-
-  axInstance = await init(
-    'YOUR_APP_KEY',
-    'YOUR_PLATFORM_KEY',
-    'YOUR_APP_VERSION',
-    'YOUR_BUILD_IDENTIFIER',
-  );
-  return axInstance;
-};
-
-export const useAX = () => {
-  useEffect(() => {
-    initAX();
-  }, []);
-  return axInstance;
-};
-```
+For React SSR frameworks such as Next.js and Remix, place the provider from Step 4 behind a client boundary and wrap the rendered app with it. For Nuxt and SvelteKit, use their framework-specific client-only plugins or components. Never initialize the SDK from server components, route handlers, or server-rendering code.
 
 ```typescript
 // app/layout.tsx
-'use client';
-
-import { useAX } from '@/lib/ax-client';
+import { AXProvider } from '@/lib/ax-client';
+import type { ReactNode } from 'react';
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
-  useAX(); // Initialize on client side only
-
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AXProvider>{children}</AXProvider>
+      </body>
     </html>
   );
-}
-```
-
-Alternatively, guard initialization explicitly:
-
-```javascript
-if (typeof window !== 'undefined') {
-  const { default: init } = await import('@appxiom/4react');
-  const ax = await init(...);
 }
 ```
 

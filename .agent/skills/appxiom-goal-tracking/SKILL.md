@@ -1,3 +1,8 @@
+---
+name: appxiom-goal-tracking
+description: "Plan and add Appxiom goal tracking with startGoal and endGoal for critical user workflows. Use when instrumenting or reviewing checkout, signup, onboarding, or other measurable flows; get user approval before adding calls."
+---
+
 # Appxiom Goal Tracking Skill
 
 Guidance for instrumenting critical workflows in a web application with Appxiom goals (`ax.startGoal` / `ax.endGoal`) using `@appxiom/web`.

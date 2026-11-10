@@ -1,5 +1,5 @@
 ---
-name: issue-severity-classification
+name: appxiom-issue-severity-classification
 description: Use when the user asks to list issues, filter bugs by severity, prioritize bugs, or understand Appxiom issue severity levels (fatal, major, minor).
 ---
 

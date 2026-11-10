@@ -1,5 +1,5 @@
 ---
-name: occurrence-telemetry-analysis
+name: appxiom-occurrence-telemetry-analysis
 description: Use when the user asks about telemetry data fields, data models (IssueView, IssueOccurrenceView, IssueDetail, IssueAnalyticsSummary, AppView, PlatformView, Version, VersionAnalyticsResponseView, MemberView, InvitationView), device specs, device state, activity trails, function parameters, or network parameters.
 ---
 

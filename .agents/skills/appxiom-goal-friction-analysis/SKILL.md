@@ -1,5 +1,5 @@
 ---
-name: goal-friction-analysis
+name: appxiom-goal-friction-analysis
 description: Use when the user asks which bugs to fix first, mentions GFI or goal drop-offs, asks for a prioritized issue list, or wants to prioritize bugs based on business conversion impact.
 ---
 

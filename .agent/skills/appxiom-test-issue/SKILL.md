@@ -1,3 +1,8 @@
+---
+name: appxiom-test-issue
+description: "Temporarily call Appxiom raiseTestIssue to verify issue reporting, then remove the trigger after validation. Use when smoke-testing SDK setup or debugging custom issue delivery in JavaScript or TypeScript apps."
+---
+
 # Appxiom Test Issue Skill
 
 Guidance for triggering a single SDK test issue to verify Appxiom reporting, then removing the test call once validation is complete.

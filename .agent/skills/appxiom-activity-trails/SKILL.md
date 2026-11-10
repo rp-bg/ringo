@@ -1,3 +1,8 @@
+---
+name: appxiom-activity-trails
+description: "Identify high-value application events and propose Appxiom logActivity instrumentation. Use when adding activity trails or breadcrumbs; get explicit approval before editing code and avoid sensitive or unbounded data."
+---
+
 # Appxiom Activity Trails Skill
 
 Guidance for adding deliberate custom activity trails to important application functions with `ax.logActivity` from `@appxiom/web`.

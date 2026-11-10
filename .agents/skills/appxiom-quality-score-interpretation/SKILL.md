@@ -1,5 +1,5 @@
 ---
-name: quality-score-interpretation
+name: appxiom-quality-score-interpretation
 description: Use when the user asks about application health, Quality Score (QS), what a QS value means, asks to evaluate release stability, or wants to understand why their score dropped.
 ---
 

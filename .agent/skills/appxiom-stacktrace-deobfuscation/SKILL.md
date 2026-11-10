@@ -1,3 +1,8 @@
+---
+name: appxiom-stacktrace-deobfuscation
+description: "Resolve JavaScript stack traces locally with @appxiom/web-map and matching source maps. Use when debugging minified production errors; keep maps and sources local, and never upload or fetch remote maps."
+---
+
 # Appxiom Stack Trace Deobfuscation Skill
 
 Guidance for installing and using `@appxiom/web-map` to resolve JavaScript stack traces against local source maps.

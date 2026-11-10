@@ -1,3 +1,8 @@
+---
+name: appxiom-web-core-integration
+description: "Integrate and configure the Appxiom Web SDK (@appxiom/web) in JavaScript and TypeScript apps, including vanilla JS, Vue, Angular, Svelte, and SSR setups. Use when adding Appxiom monitoring, telemetry, browser initialization, or WASM deployment configuration."
+---
+
 # Appxiom Core Integration Skill
 
 Comprehensive guidance for integrating the Appxiom Web SDK (`@appxiom/web`) into web applications.
